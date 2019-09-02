@@ -23,19 +23,9 @@ pipeline {
             }
         }
 
-        stage('Build environment') {
+      stage('Unit tests') {
             steps {
-                echo "Building virtualenv"
-
-                sh  ''' #!/bin/bash
-                        pip install -r requirements/dev.txt
-                    '''
-            }
-        }
-
-        stage('Unit tests') {
-            steps {
-                  sh  ''' activate mybuild && python -m pytest --verbose --junit-xml reports/unit_tests.xml
+                  sh  ''' python -m pytest --verbose --junit-xml reports/unit_tests.xml
                     '''
             }
             post {
@@ -48,7 +38,7 @@ pipeline {
 
         stage('Acceptance tests') {
             steps {
-                sh  '''activate mybuild && behave -f=formatters.cucumber_json:PrettyCucumberJSONFormatter -o ./reports/acceptance.json || true
+                sh  '''behave -f=formatters.cucumber_json:PrettyCucumberJSONFormatter -o ./reports/acceptance.json || true
                     '''
             }
             post {
@@ -69,7 +59,7 @@ pipeline {
                 }
             }
             steps {
-                sh  ''' activate mybuild && python setup.py bdist_wheel
+                sh  ''' python setup.py bdist_wheel
                     '''
             }
             post {

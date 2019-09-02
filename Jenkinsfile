@@ -25,7 +25,7 @@ pipeline {
 
       stage('Unit tests') {
             steps {
-                  sh "./scripts/tests.sh"
+                  bat "./scripts/tests.bat"
             }
             post {
                 always {

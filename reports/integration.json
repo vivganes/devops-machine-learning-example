@@ -1,0 +1,57 @@
+[
+{
+  "elements": [
+    {
+      "keyword": "Scenario",
+      "location": "tests/features/iris.feature:3",
+      "name": "run main program loop",
+      "status": "failed",
+      "steps": [
+        {
+          "keyword": "Given",
+          "location": "tests/features/iris.feature:4",
+          "match": {
+            "arguments": [],
+            "location": "tests/features/steps/iris_steps.py:3"
+          },
+          "name": "we have irisvmpy installed",
+          "result": {
+            "duration": 0.0,
+            "error_message": [
+              "Traceback (most recent call last):",
+              "  File \"c:\\users\\calib\\.conda\\envs\\mybuild\\lib\\site-packages\\behave\\model.py\", line 1329, in run",
+              "    match.run(runner.context)",
+              "  File \"c:\\users\\calib\\.conda\\envs\\mybuild\\lib\\site-packages\\behave\\matchers.py\", line 98, in run",
+              "    self.func(context, *args, **kwargs)",
+              "  File \"tests\\features\\steps\\iris_steps.py\", line 5, in step_impl",
+              "    raise NotImplementedError(u'STEP: Given we have irisvmpy installed')",
+              "NotImplementedError: STEP: Given we have irisvmpy installed"
+            ],
+            "status": "failed"
+          },
+          "step_type": "given"
+        },
+        {
+          "keyword": "When",
+          "location": "tests/features/iris.feature:5",
+          "name": "we run program",
+          "step_type": "when"
+        },
+        {
+          "keyword": "Then",
+          "location": "tests/features/iris.feature:6",
+          "name": "Something will be displayed",
+          "step_type": "then"
+        }
+      ],
+      "tags": [],
+      "type": "scenario"
+    }
+  ],
+  "keyword": "Feature",
+  "location": "tests/features/iris.feature:1",
+  "name": "irissvmpy performance",
+  "status": "failed",
+  "tags": []
+}
+]

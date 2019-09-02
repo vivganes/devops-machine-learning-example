@@ -27,8 +27,8 @@ pipeline {
         stage('Build environment') {
             steps {
                 echo "Building virtualenv"
-                sh  ''' conda create --yes -n ${BUILD_TAG} python
-                        source activate ${BUILD_TAG}
+                sh  ''' conda create --yes -n mybuild python
+                        activate mybuild
                         pip install -r requirements/dev.txt
                     '''
             }
@@ -37,19 +37,19 @@ pipeline {
         stage('Static code metrics') {
             steps {
                 echo "Raw metrics"
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' activate mybuild
                         radon raw --json irisvmpy > raw_report.json
                         radon cc --json irisvmpy > cc_report.json
                         radon mi --json irisvmpy > mi_report.json
                         sloccount --duplicates --wide irisvmpy > sloccount.sc
                     '''
                 echo "Test coverage"
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' activate mybuild
                         coverage run irisvmpy/iris.py 1 1 2 3
                         python -m coverage xml -o reports/coverage.xml
                     '''
                 echo "Style check"
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' activate mybuild
                         pylint irisvmpy || true
                     '''
             }
@@ -74,7 +74,7 @@ pipeline {
 
         stage('Unit tests') {
             steps {
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' activate mybuild
                         python -m pytest --verbose --junit-xml reports/unit_tests.xml
                     '''
             }
@@ -88,7 +88,7 @@ pipeline {
 
         stage('Acceptance tests') {
             steps {
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' activate mybuild
                         behave -f=formatters.cucumber_json:PrettyCucumberJSONFormatter -o ./reports/acceptance.json || true
                     '''
             }
@@ -110,7 +110,7 @@ pipeline {
                 }
             }
             steps {
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' activate mybuild
                         python setup.py bdist_wheel
                     '''
             }
@@ -132,7 +132,7 @@ pipeline {
 
     post {
         always {
-            sh 'conda remove --yes -n ${BUILD_TAG} --all'
+            sh 'conda remove --yes -n mybuild --all'
         }
         failure {
             emailext (

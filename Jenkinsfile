@@ -41,20 +41,6 @@ pipeline {
             }
         }
 
-        stage('Acceptance tests') {
-            steps {
-                bat "./scripts/acceptance.bat"
-            }
-            post {
-                always {
-                    cucumber (buildStatus: 'SUCCESS',
-                    fileIncludePattern: '**/*.json',
-                    jsonReportDirectory: './reports/',
-                  //  parallelTesting: true,
-                    sortingMethod: 'ALPHABETICAL')
-                }
-            }
-        }
 
         stage('Build package') {
             when {

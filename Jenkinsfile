@@ -25,7 +25,10 @@ pipeline {
 
       stage('Unit tests') {
             steps {
-                  bat  ''' activate mybuild && python -m pytest --verbose --junit-xml reports/unit_tests.xml
+                  bat  '''
+                  conda init bash 
+                  activate mybuild
+                  python -m pytest --verbose --junit-xml reports/unit_tests.xml
                     '''
             }
             post {

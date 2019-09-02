@@ -13,7 +13,7 @@ pipeline {
     }
 
     environment {
-      PATH="C:\\ProgramData\\Anaconda3:$PATH"
+      PATH="C:\\Users\\calib\\.conda\\envs\\mybuild:$PATH"
     }
 
     stages {
@@ -38,7 +38,7 @@ pipeline {
 
         stage('Unit tests') {
             steps {
-                sh  ''' activate mybuild && python -m pytest --verbose --junit-xml reports/unit_tests.xml
+                  sh  ''' activate mybuild && python -m pytest --verbose --junit-xml reports/unit_tests.xml
                     '''
             }
             post {

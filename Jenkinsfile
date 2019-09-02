@@ -12,9 +12,9 @@ pipeline {
         timestamps()
     }
 
-    environment {
-      PATH="/var/lib/jenkins/miniconda3/bin:$PATH"
-    }
+    //environment {
+      //PATH="/var/lib/jenkins/miniconda3/bin:$PATH"
+    //}
 
     stages {
 
@@ -97,7 +97,7 @@ pipeline {
                     cucumber (buildStatus: 'SUCCESS',
                     fileIncludePattern: '**/*.json',
                     jsonReportDirectory: './reports/',
-                    parallelTesting: true,
+                  //  parallelTesting: true,
                     sortingMethod: 'ALPHABETICAL')
                 }
             }

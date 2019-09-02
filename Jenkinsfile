@@ -27,7 +27,9 @@ pipeline {
         stage('Build environment') {
             steps {
                 echo "Building virtualenv"
-                sh  ''' pip install -r requirements/dev.txt
+                sh  ''' conda create --yes -n mybuild python
+                        activate mybuild
+                        pip install -r requirements/dev.txt
                     '''
             }
         }
@@ -36,7 +38,8 @@ pipeline {
 
         stage('Unit tests') {
             steps {
-                sh  '''  python -m pytest --verbose --junit-xml reports/unit_tests.xml
+                sh  ''' activate mybuild
+                 python -m pytest --verbose --junit-xml reports/unit_tests.xml
                     '''
             }
             post {
@@ -49,7 +52,8 @@ pipeline {
 
         stage('Acceptance tests') {
             steps {
-                sh  ''' behave -f=formatters.cucumber_json:PrettyCucumberJSONFormatter -o ./reports/acceptance.json || true
+                sh  '''activate mybuild
+                 behave -f=formatters.cucumber_json:PrettyCucumberJSONFormatter -o ./reports/acceptance.json || true
                     '''
             }
             post {
@@ -70,7 +74,8 @@ pipeline {
                 }
             }
             steps {
-                sh  ''' python setup.py bdist_wheel
+                sh  ''' activate mybuild
+                python setup.py bdist_wheel
                     '''
             }
             post {

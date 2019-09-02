@@ -27,8 +27,10 @@ pipeline {
         stage('Build environment') {
             steps {
                 echo "Building virtualenv"
-                sh  ''' conda create --yes -n mybuild python
-                        conda init bash && activate mybuild && pip install -r requirements/dev.txt
+                sh  ''' #!/bin/bash
+                        conda create --yes -n mybuild python
+                        activate mybuild
+                        pip install -r requirements/dev.txt
                     '''
             }
         }

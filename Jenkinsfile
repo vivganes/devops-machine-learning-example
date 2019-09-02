@@ -37,8 +37,7 @@ pipeline {
 
         stage('Acceptance tests') {
             steps {
-                sh  '''activate mybuild && behave -f=formatters.cucumber_json:PrettyCucumberJSONFormatter -o ./reports/acceptance.json || true
-                    '''
+                bat "./scripts/acceptance.bat"
             }
             post {
                 always {
@@ -58,8 +57,7 @@ pipeline {
                 }
             }
             steps {
-                sh  ''' activate mybuild && python setup.py bdist_wheel
-                    '''
+                bat "./scripts/package.bat"
             }
             post {
                 always {

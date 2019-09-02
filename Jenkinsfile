@@ -23,6 +23,12 @@ pipeline {
             }
         }
 
+        stage('Build environment') {
+              steps {
+                  bat "./scripts/environment.bat"
+              }
+          }
+
       stage('Unit tests') {
             steps {
                   bat "./scripts/tests.bat"

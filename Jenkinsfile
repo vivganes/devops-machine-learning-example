@@ -17,7 +17,6 @@ pipeline {
     }
 
     stages {
-
         stage ("Code pull"){
             steps{
                 checkout scm
@@ -27,6 +26,7 @@ pipeline {
         stage('Build environment') {
             steps {
                 echo "Building virtualenv"
+                echo "test"
                 sh  ''' #!/bin/bash
                         conda create --yes -n mybuild python
                         activate mybuild
@@ -34,8 +34,6 @@ pipeline {
                     '''
             }
         }
-
-
 
         stage('Unit tests') {
             steps {

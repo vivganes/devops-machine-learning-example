@@ -1,3 +1,4 @@
 CALL conda.bat activate mybuild
 echo %CONDA_PREFIX%
-behave -f=formatters.cucumber_json:PrettyCucumberJSONFormatter -o ./reports/acceptance.json
+behave -f=json.pretty -o ./reports/integration.json
+python -m behave2cucumber ./reports/integration.json

@@ -1,3 +1,5 @@
+(Credits: Forked from https://github.com/mdyzma/jenkins-python-test and modified)
+
 # jenkins python ci/cd
 
 Test repository for Jenkins based CI/CD of python project.
